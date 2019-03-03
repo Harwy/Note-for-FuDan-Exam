@@ -108,7 +108,7 @@
 
 [练习1-看电视](http://codeup.cn/problem.php?cid=100000584&pid=0)
 
-[练习1-答案](练习题\tanxin_001.cpp)
+[练习1-答案](practiseBox\tanxin_001.cpp)
 
 ---
 # 查找
@@ -117,12 +117,12 @@
 
 * 严格有序下查找
 
-[ [练习1-sqrt(2)的近似值] ](练习题\search_001.cpp)
+[ [练习1-sqrt(2)的近似值] ](practiseBox\search_001.cpp)
 
 ### >技巧：two pointers
 >序列递增条件下\
 >若需要求a+b的和等于M的情况，不需要枚举所有情况（该情况下复杂度O(n^2)）\
->可使用两端向中间逼近的方法。[ [示例] ](练习题\two-point.cpp) \
+>可使用两端向中间逼近的方法。[ [示例] ](practiseBox\two-point.cpp) \
 >还可以方便的解决序列合并问题。
 
 
@@ -142,8 +142,8 @@
 ## 2. 快速排序
 
 > 快速排序思想上是two pointers  
-递归: [ [示例] ](练习题\quickSort_1.cpp)  
-非递归：[ [示例] ](练习题\quickSort_2.cpp) 
+递归: [ [示例] ](practiseBox\quickSort_1.cpp)  
+非递归：[ [示例] ](practiseBox\quickSort_2.cpp) 
 ---
 
 <span id = "jump-stl"><h1>5-STL库学习</h1></span>
@@ -151,7 +151,7 @@
 > C++提供的标准模板库
 ---
 ## 1.vector
-> vector(向量)，变长数组  [ [示例] ](练习题\vector.cpp)  
+> vector(向量)，变长数组  [ [示例] ](practiseBox\vector.cpp)  
 
 ``` C++
 // 头文件
@@ -173,8 +173,8 @@ vector<int> vi[100];
 * pop_back( );  删除vector的尾元素，时间复杂度O(1)
 * size( );  获取vector中元素的个数，返回unsigned类型，一般用%d 问题不大，时间复杂度O(1)
 * clear( ); 清空vector中所有元素，时间复杂度O(N)
-* insert(it, x) 向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)  [ [示例-insert用法] ](练习题\vector-insert.cpp)
-* erase( ) [ [示例-erase用法] ](练习题\vector-erase.cpp)
+* insert(it, x) 向vector的任意迭代器it处插入一个元素x，时间复杂度O(N)  [ [示例-insert用法] ](practiseBox\vector-insert.cpp)
+* erase( ) [ [示例-erase用法] ](practiseBox\vector-erase.cpp)
     * 1.删除单个元素  
         erase(it) 删除迭代器为it处的元素  
     * 2.删除一个区间内的所有元素  
@@ -205,7 +205,7 @@ set<int> a[100];
 /* 仅能通过迭代器访问 */
 set<int>::iterator it;  
 ```
-PS：除了vector和string之外的STL容器都不支持*(it + i)的访问方式，因此只能枚举：[ [示例-set访问] ](练习题\set.cpp),set内元素自动递增，且无重复。
+PS：除了vector和string之外的STL容器都不支持*(it + i)的访问方式，因此只能枚举：[ [示例-set访问] ](practiseBox\set.cpp),set内元素自动递增，且无重复。
 
 ### set常用函数实例解析
 * insert( ) 插入元素，时间复杂度O(logN)
@@ -221,7 +221,7 @@ printf("%d", *it);
 // 表达2:
 printf("%d", *(st.find(2)) );
 ```
-* erase( ) [ [示例-set删除] ](练习题\set-erase.cpp)
+* erase( ) [ [示例-set删除] ](practiseBox\set-erase.cpp)
     * 删除单个元素
     > 删除本身操作时间复杂度为O(1),但需要查找是否存在该数据，因此时间复杂度为O(logN).
     ```C++
@@ -273,19 +273,19 @@ printf("%d", *(st.find(2)) );
 <span id = "jump-math"><h1>6-数学问题——2019.03.02</h1></span>
 
 ## 1.最大公约数/最小公倍数
-> 最大公约数：辗转相除法（gcd函数）[ [示例] ](练习题\gcd.cpp)
+> 最大公约数：辗转相除法（gcd函数）[ [示例] ](practiseBox\gcd.cpp)
 
 > 最小公倍数：在得到最大公约数d之后，最小公倍数为a / d * b（lcm函数）
 
 ## 2.分数四则运算
-> 分数表示结构体Fraction[ [示例] ](练习题\fraction.cpp)[未完工，进度10%]
+> 分数表示结构体Fraction[ [示例] ](practiseBox\fraction.cpp)[未完工，进度10%]
 
 
 ## 3.素数
 > 素数，又质数，除了1和本身之外不能被其他数整除。  
 > 1既不是素数也不是合数。
-> * 判断是否是素数。[ [示例] ](练习题\isPrime.cpp)
-> * 快速得到1~n内的素数表。[ [示例] ](练习题\isPrime.cpp)
+> * 判断是否是素数。[ [示例] ](practiseBox\isPrime.cpp)
+> * 快速得到1~n内的素数表。[ [示例] ](practiseBox\isPrime.cpp)
 
 ## 4.质因子分解
 ## 5.大整数运算
