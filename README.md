@@ -1,4 +1,4 @@
-# 算法笔记目录
+# <span id = "top">-</span>算法笔记目录 
 [1-黑盒测试——2019.02.27](#jump0227)
 
 [2-还没想好标题——2019.02.28](#jump0228)
@@ -8,16 +8,17 @@
 [4-排序——2019.03.02](#jump-sort)
 * 归并排序
 
-[5-STL库学习——2019.03.03](#jump-stl)
-* vector
-* set
-* string
-* map
-* queue
-* priority_queue
-* stack
-* pair
-* algorithm
+[5-STL库学习——2019.03.04](#jump-stl)
+* [->](#vector) vector 
+* [->](#set) set  
+* [->](#string) string 
+* [->](#map) map 
+* [->](#queue) queue 
+* [->](#priority_queue) priority_queue 
+* [->](#stack) stack 
+* [->](#pair) pair 
+* [->](#algorithm) algorithm 
+
 
 [6-数学问题——2019.03.02](#jump-math)
 * 最大公约数/最小公倍数
@@ -28,7 +29,6 @@
 * 组合数
 
 
-
 [备注](#beizhu)
 
 ### 作者PS：
@@ -37,7 +37,8 @@
 
 ----
 ----
-<span id = "jump0227"><h1>1-黑盒测试——2019.02.27</h1></span>
+
+<span id = "jump0227"><h1>[☝](#top) 1-黑盒测试——2019.02.27</h1></span>
 
 ## 一.黑盒测试：
 
@@ -93,7 +94,7 @@
 ---------------------------------------------------------
 
 
-<span id = "jump0228"><h1>2-还没想好标题-2019.02.28</h1></span>
+<span id = "jump0228"><h1>[☝](#top) 2-还没想好标题-2019.02.28</h1></span>
 
 >\
 > 这人很懒什么也没有留 \
@@ -102,7 +103,7 @@
 
 ---
 
-<span id = "jump0301"><h1>3-贪心算法/查找  —— 2019.03.01</h1></span>
+<span id = "jump0301"><h1>[☝](#top) 3-贪心算法/查找  —— 2019.03.01</h1></span>
 
 # 贪心算法
 
@@ -143,9 +144,9 @@
 
 ---
 
-<span id = "jump-sort"><h1>4-排序</h1></span>
+<span id = "jump-sort"><h1>[☝](#top) 4-排序</h1></span>
 
-## 1. 归并排序
+## 1. 归并排序    [施工中]
 
 > 2-路归并排序
 
@@ -160,13 +161,14 @@
 
 
 
-<span id = "jump-stl"><h1>5-STL库学习</h1></span>
+<span id = "jump-stl"><h1>[☝](#top) 5-STL库学习</h1></span>
 
 > C++提供的标准模板库
 
 ---
 
-## 1.vector
+## 1.vector <span id = "vector">-[☝](#top) </span>
+
 
 > vector(向量)，变长数组  [ [示例] ](practiseBox/vector.cpp)  
 
@@ -184,6 +186,8 @@ vector<int> vi[100];
 > 1. vi[i]
 > 2. 迭代器it vector< int > :: iterator it = vi.begin();   
 >    *(it + i) 访问  
+
+---
 
 ### vector常用函数实例解析
 
@@ -205,7 +209,8 @@ vector<int> vi[100];
 * PS：所有常用函数都是在vector实例化下使用，即例如： vi.push_back
 ---
 
-## 2.set
+## 2.set <span id = "set">-[☝](#top) </span>
+
 
 > set,集合，内部自动有序且不含重复元素的容器
 
@@ -227,6 +232,8 @@ set<int>::iterator it;
 ```
 
 PS：除了vector和string之外的STL容器都不支持*(it + i)的访问方式，因此只能枚举：[ [示例-set访问] ](practiseBox/set.cpp),set内元素自动递增，且无重复。
+
+---
 
 ### set常用函数实例解析
 
@@ -264,7 +271,8 @@ PS：除了vector和string之外的STL容器都不支持*(it + i)的访问方式
 ---
 
 
-## 3.string
+## 3.string <span id = "string">-[☝](#top) </span>
+
 
 > C语言中使用字符数组char str[]存放字符串，但是操作十分麻烦。  
 > C++中加入了string类型
@@ -286,6 +294,8 @@ cout<<str;  // 输出
 string::iterator it;
 ```
 [ [示例-string迭代器访问] ](practiseBox/string.cpp)
+
+---
 
 ### string常用函数实例解析
 * operator+=  
@@ -370,32 +380,258 @@ string::npos是常数，本身值为-1，由于是unsigned_int类型，因此可
 * replace()  
     * str.replace(pos, len, str2) 把str从pos开始、长度为len的子串替换为str2.
     * str.replace(it1, it2, str2) 把str的迭代器[it1, it2)范围的子串替换为str2.
+* PAT真题练习[ [例题-A1060 利用string解题] ](PAT乙级/A1060.cpp)
 
-## 4.map
+## 4.map <span id = "map">-[☝](#top) </span>
+
+
+> map，映射。可以将任何基本类型映射到任何基本类型。  
+> PS：无法用char数组作为键值，必须用string。  
+> **map会以键从小到大的顺序自动排序。因map内部使用红黑树实现。（同set）**
+```C++
+// 头文件
+#include<map>
+using namespace std;
+// 定义
+map<typename1, typename2> mp;
+map<string, int> mp; // 第一个是键的类型，第二个是值的类型
+map<set<int>, string> mp;
+// 访问方式
+// (1)通过下标访问
+map<char, int> mp;
+mp['c'] = 20;  // mp['c'] = 20
+mp['c'] = 30;  // 一一对应，被覆盖 mp['c'] = 30
+// (2)通过迭代器访问
+map<char, int>::iterator it = mp.begin();
+it -> first;  // c
+it -> second;  // 30
+for(map<char, int>::iterator it = mp.begin(); it != mp.end(); it++){
+    /*  code  */
+}
+```
+---
+### map常用函数实例分析  [ [示例-map使用] ](practiseBox/map.cpp)
+* find()  
+find(key)返回key的映射的迭代器，时间复杂度O(logN).
+    ```C++
+    map<char, int> mp;
+    mp['a'] = 1;
+    map<char, int>::iterator it = mp.find('a');
+    it -> first; // a
+    it -> second; // 1
+    ```
+* erase()  
+有两种方法
+    * 删除单个元素
+        1. 按照迭代器删除
+        ```C++
+        mp.erase(it); // it为需要删除的迭代器
+        // eg:
+        mp['a'] = 1;
+        mp['b'] = 2;
+        map<char, int>::iterator it = mp.find('a');
+        mp.erase(it); // 删除 b 2
+        ```
+        2. 按照映射的键删除
+
+        ```C++
+        mp.erase(key); // key为需要删除的映射的键
+        // eg:
+        mp['a'] = 1;
+        mp['b'] = 2;
+        mp.erase('b'); // 删除 b 2
+        ```
+    * 删除一个区间所有函数
+    ```C++
+    mp.erase(first, last); // first与last为迭代器，删除[first, last)范围内元素
+    // eg:
+    mp['a'] = 1;
+    mp['b'] = 2;
+    mp['c'] = 3;
+    map<char, int>::iterator it = mp.find('b');
+    mp.erase(it, mp.end() );  // 删除 b 2 和 c 3
+    ```
+* size()  
+获得map中映射的对数
+    ```C++
+    mp.size();
+    ```
+* clear() b 
+清空map中所有元素
+    ```C++
+    mp.clear();
+    ```
+* map常见用途
+    1. 需要建立字符（或字符串）与整数直接映射的题目，使用map减少代码量。
+    2. 判断大整数或者其他类型数据是否存在的题目，可以把mao当bool数组使用
+---
+
+## 5.queue <span id = "queue">-[☝](#top) </span>  
+queue，队列。先进先出的容器 
+```C++
+// 头文件
+#include<queue>
+using namespace std;
+// 定义
+queue< typename > name;
+// 元素访问
+queue<int> q;
+q.front(); // 访问队首元素
+q.back(); // 访问队尾元素
+```
 
 ---
 
-## 5.queue
+### queue常用函数实例解析 [ [示例-queue队列] ](practiseBox/queue.cpp)
+* push()   
+入队
+    ```C++
+    q.push(x);  // 队尾x入队
+    ```
+* pop()   
+出队
+    ```C++
+    q.pop();  // 队首元素出队
+    ```
+* front()、back()  
+分别访问队首和队尾
+
+* empty()  
+监测queue是否为空，返回true则空；false则非空
+    ```C++
+    if(q.empty() == true){ // 当前队列为空
+        /* code */
+    }
+    ```
+* size()  
+返回queue内元素个数
+* queue常见用途
+    1. 实现广度优先搜索时，不用手动实现一个队列。
+    2. 使用front和pop函数前，必须用empty()判断是否为空。
 
 ---
 
-## 6.priority_queue
+## 6.priority_queue <span id = "priority_queue">-[☝](#top) </span>  
+优先队列，其底层用堆实现，队首元素一定是当前队列中优先级最高的那个。  [施工中]
+
 
 ---
 
-## 7.stack
+## 7.stack <span id = "stack">-[☝](#top) </span>  
+stack，栈。后进先出的容器。[ [示例-stack栈] ](practiseBox/stack.cpp)
+```C++ 
+// 头文件
+#include<stack>
+using namespace std;
+// 定义
+stack< typename > name;
+// 访问
+st.top();  // 访问栈顶元素
+```
+### stack常用函数实例解析
+---
+* push()  入栈
+    ```C++
+    st.push(i);
+    ```
+* pop()  出栈
+    ```C++
+    st.pop();
+    ```
+* top()  访问栈顶元素
+    ```C++
+    cout<<st.top();
+    ```
+* empty()  监测stack是否为空
+* size()  返回stack内元素个数
+* stack的常见用途
+---
+
+## 8.pair <span id = "pair">-[☝](#top) </span> [施工中]
+
 
 ---
 
-## 8.pair
+## 9.algorithm[ [示例-algorithm] ](practiseBox/math.cpp)  <span id = "algorithm">-[☝](#top) </span>
+---
+1. max() / min() / abs() 
+    * max(x,y)和min(x,y)分别返回x和y中的最大值和最小值，且参数必须是两个，若要比较三个可以使用max(x, max(y, z))
+    * abx(x)返回x的绝对值。**x必须是整数** *浮点型使用math头文件下的fabs*
+        ```C++
+        max(x,y);
+        min(x,y);
+        abs(x);
+        ```
+2. swap()  
+swap(x,y)交换x和y的值。
+    ```C++
+    swap(x,y);
+    ```
+3. reverse()  
+reverse(it, it2)将数组指针在[it, it2)之间的元素或容器的迭代器在[it, it2)范围内的元素进行反转。
+    ```C++
+    // 反转数组
+    int a[10] = {1,2,3,4,5,6};
+    reverse(a, a+4);  // 将a[0]~a[3]反转 
+    // 反转容器中的元素，如string字符串
+    string str = "abcdefghi";
+    reverse(str.begin() + 2, str.begin() + 6); // 对str[2]~str[5]反转 
+    ```
+4. next_permutation()   
+next_permutation()给出一个序列在全排列中的下一个序列。
+    ```C++
+    int a[10] = {1,2,3};
+    do{
+        printf("%d%d%d", a[0], a[1], a[2]);
+    }while(next_permutation(a, a+3));
+    ```
+5. fill()  
+把数组或容器中的某一段区间赋相同的值。和memset不同，可以赋值数组类型范围内的任意值。
+    ```C++
+    fill(a+1,a+5,233); // a[0]~a[4]
+    ```
+6. sort()  
+sort，排序函数
+    ```C++
+    sort(首元素地址,尾元素地址的下一个地址,比较函数(非必填))
+    sort(a,a+4,cmp);
+    ```
+    * 比较函数cmp自定义排序规则
+    ```C++
+    // (1)整型int情况
+    bool cmp(int a, int b){
+        return a>b;  // a放在b的前面
+    }
+    // (2)结构体node情况
+    struct node{
+        int x,y;
+    }ssd[10];
+    // 按照x从大到小排列
+    bool cmp(node a, node b){
+        return a.x > b.x;
+    }
+    // (3)vector、string情况
+    // vector
+    bool cmp(int a, int b){
+        return a>b;
+    }
+    vector<int> vi;
+    vi.push_back(3);
+    vi.push_back(4);
+    vi.push_back(1);
+    sort(vi.begin(), vi.end(), cmp); // 从大到小
+    // string
+    string str[3] = {"bbbb", "cc", "aaa"};
+    sort(str, str+3); // 按字典序从小到大
+    ```
+7. lower_bound()和upper_bound()  [施工中]
 
 ---
 
-## 9.algorithm
+<span id = "jump-math"><h1>[☝](#top) 6-数学问题——2019.03.02</h1></span>  
+
 
 ---
-
-<span id = "jump-math"><h1>6-数学问题——2019.03.02</h1></span>
 
 ## 1.最大公约数/最小公倍数
 > 最大公约数：辗转相除法（gcd函数）[ [示例] ](practiseBox/gcd.cpp)
@@ -416,7 +652,7 @@ string::npos是常数，本身值为-1，由于是unsigned_int类型，因此可
 ## 5.大整数运算
 ## 6.组合数
 
-<span id = "beizhu"><h1>备注</h1></span>
+<span id = "beizhu"><h1>[☝](#top) 备注</h1></span>
 
 MarkDown跳转锚的使用方法：
 
@@ -457,6 +693,11 @@ int main(){
     return 0;
 
 }
-```# Note
-# Note-for-FuDan-Exam
-# Note-for-FuDan-Exam
+```
+## Note-for-FuDan-Exam
+---
+
+THE END  (Github@Harwy)  
+[GO BACK TO TOP☝](#top) 
+
+---
