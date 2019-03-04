@@ -8,7 +8,16 @@
 [4-排序——2019.03.02](#jump-sort)
 * 归并排序
 
-[5-STL库学习——2019.03.02](#jump-stl)
+[5-STL库学习——2019.03.03](#jump-stl)
+* vector
+* set
+* string
+* map
+* queue
+* priority_queue
+* stack
+* pair
+* algorithm
 
 [6-数学问题——2019.03.02](#jump-math)
 * 最大公约数/最小公倍数
@@ -23,7 +32,8 @@
 [备注](#beizhu)
 
 ### 作者PS：
-> / 2019.03.01 完成与github的对接&重新细分目录
+> / 2019.03.01 完成与github的对接&重新细分目录  
+> / 2019.03.03 在window下路径为"a\b.cpp"，但在github上路径为"a/b.cpp",予以修正
 
 ----
 ----
@@ -146,11 +156,18 @@
 非递归：[ [示例] ](practiseBox/quickSort_2.cpp) 
 ---
 
+
+
+
+
 <span id = "jump-stl"><h1>5-STL库学习</h1></span>
 
 > C++提供的标准模板库
+
 ---
+
 ## 1.vector
+
 > vector(向量)，变长数组  [ [示例] ](practiseBox/vector.cpp)  
 
 ``` C++
@@ -169,6 +186,7 @@ vector<int> vi[100];
 >    *(it + i) 访问  
 
 ### vector常用函数实例解析
+
 * push_back(i); 在vector后面添加一个数据i ，时间复杂度O(1)
 * pop_back( );  删除vector的尾元素，时间复杂度O(1)
 * size( );  获取vector中元素的个数，返回unsigned类型，一般用%d 问题不大，时间复杂度O(1)
@@ -188,7 +206,9 @@ vector<int> vi[100];
 ---
 
 ## 2.set
+
 > set,集合，内部自动有序且不含重复元素的容器
+
 ```C++
 // 头文件
 #include<set>
@@ -205,22 +225,24 @@ set<int> a[100];
 /* 仅能通过迭代器访问 */
 set<int>::iterator it;  
 ```
+
 PS：除了vector和string之外的STL容器都不支持*(it + i)的访问方式，因此只能枚举：[ [示例-set访问] ](practiseBox/set.cpp),set内元素自动递增，且无重复。
 
 ### set常用函数实例解析
+
 * insert( ) 插入元素，时间复杂度O(logN)
-```C++
-st.insert(x); // 将x插入set容器，自动递增排序和去重
-```
+    ```C++
+    st.insert(x); // 将x插入set容器，自动递增排序和去重
+    ```
 * find( ) 查找元素
-```C++
-st.find(value); // 返回set中对应值为value的迭代器，时间复杂度O(logN)
-// 表达1：
-set<int>::iterator it = st.find(2);
-printf("%d", *it);
-// 表达2:
-printf("%d", *(st.find(2)) );
-```
+    ```C++
+    st.find(value); // 返回set中对应值为value的迭代器，时间复杂度O(logN)
+    // 表达1：
+    set<int>::iterator it = st.find(2);
+    printf("%d", *it);
+    // 表达2:
+    printf("%d", *(st.find(2)) );
+    ```
 * erase( ) [ [示例-set删除] ](practiseBox/set-erase.cpp)
     * 删除单个元素
     > 删除本身操作时间复杂度为O(1),但需要查找是否存在该数据，因此时间复杂度为O(logN).
@@ -244,7 +266,110 @@ printf("%d", *(st.find(2)) );
 
 ## 3.string
 
----
+> C语言中使用字符数组char str[]存放字符串，但是操作十分麻烦。  
+> C++中加入了string类型
+```C++
+// C++头文件
+#include<string>
+using namespace std;
+// 定义
+string str;
+string str = "abcd";  // 初始化赋值
+// 访问
+// (1)通过下标访问
+string str;
+printf("%c",str[i]);  // 输出单个字符
+printf("%s",str.c_str() ); // 将string类型转化为字符数组
+cin>>str;  // 读入
+cout<<str;  // 输出
+// (2)通过迭代器访问,没有参数
+string::iterator it;
+```
+[ [示例-string迭代器访问] ](practiseBox/string.cpp)
+
+### string常用函数实例解析
+* operator+=  
+string的加法，将2个string直接拼接
+    ```C++
+    string str1="abc", str2="xyz",str3;
+    str3 = str1 + str2;
+    str1 += str2;
+    ```
+* compare operator  
+ 两个string类型可以直接使用== 、！=、<、<=、 => 、>比较大小，比较规则为 **字典序**
+    ```C++
+    if(str1 < str2) printf("OK1\n");
+    ```
+
+* length()/size()  
+length()返回string的长度，即存放的字符数，时间复杂度为O(1)，size()与length()基本相同。
+    ```C++
+    str.length();
+    str.size();
+    ```
+
+* insert()  [ [示例-string的insert用法] ](practiseBox/string-insert.cpp)  
+string的insert()有多种写法。时间复杂度O(N).
+    * insert(pos, string)  
+    在pos号位置插入字符串string，这里pos指数字
+    ```C++
+    string str = "abcxyz";
+    string str2 = "opq";
+    str.insert(3, str2);  // 在str[3]处插入opq，得：abcopqxyz
+    ```
+    * insert(it, it2, it3)  
+    串[it2,it3)插入到it位置上,这里it指string的迭代器
+    ```C++
+    string str = "abcxyz";
+    string str2 = "opq";
+    str.insert(str.begin() + 3, str2.begin(), str2.end());
+    ```
+* erase()  [ [示例-string的erase用法] ](practiseBox/string-erase.cpp)
+    * 删除单个元素
+    ```C++
+    str.erase(str.begin() + 4);
+    ```
+    * 删除一个区域内所有元素
+    ```C++
+    // str.erase(first,last) 删除[first,last)内的元素
+    str.erase(str.begin() + 2, str.end() + 1);
+    // str.erase(pos,length) 删除pos开始length长度的元素
+    str.erase(3,2);  
+    ```
+
+* clear()  
+清空string中的数据，时间复杂度O(1)。
+* substr()  
+sub(pos, len)返回从pos号位开始，长度为len的子串，时间复杂度为O(len)
+* string::npos  
+string::npos是常数，本身值为-1，由于是unsigned_int类型，因此可认为是unsigned_int类型的最大值。用以作为find函数的失配返回值。
+    ```C++
+    if(string::npos == -1){
+        cout<<"-1 is true."<<endl;
+    }
+    if(string::npos == 4294967295){
+        cout<<"4294967295 is also true."<<endl;
+    }
+    ```
+
+* find()  [ [示例-string的find用法] ](practiseBox/string-find.cpp)  
+    * str.find(str2)，当str2是str的字串时，返回其在str中第一次出现的位置；否则，返回string::npos。  
+    * str.find(str2, pos)，从str的pos号位开始匹配str2，返回值与上相同。
+    * 时间复杂度为O(nm)，其中n和m分别为str和str2的长度。
+    ```C++
+    string str = "Thank you for your smile.";
+    string str1 = "you";
+    string str2 = "me";
+    if(str.find(str1) != string::npos){ // str中是否有子串str1
+        cout<<str.find(str1)<<endl;
+    }else{
+        cout<<"Not find."<<endl;
+    }
+    ```
+
+* replace()  
+    * str.replace(pos, len, str2) 把str从pos开始、长度为len的子串替换为str2.
+    * str.replace(it1, it2, str2) 把str的迭代器[it1, it2)范围的子串替换为str2.
 
 ## 4.map
 
