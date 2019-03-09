@@ -34,6 +34,8 @@
 
 [施工中] [9-字符串进阶]()
 
+[习题集](PAT-Book.md)
+
 [备注](#beizhu)
 
 ### 作者PS：
@@ -42,7 +44,7 @@
 > / 2019.04.04 更新全部目录，天呐还有好多内容。。。在2周时间内能够学完么？
 
 ---
-![图片-绿谷](777.jpg)
+![图片-777](777.jpg)
 永远不要等后悔了才开始努力~好的~  
 正文开始
 
@@ -667,26 +669,112 @@ sort，排序函数
 <span id = "jump-studyup"><h1>[☝](#top) 7-数据结构——2019.03.04</h1></span>
 
 ## 1. 栈的应用
-
+stack
 ---
 
 ## 2. 队列的应用
-
+queue
 ---
 
 ## 3. 链表处理
-
+```C++
+struct node{
+    typename data;
+    node* next;
+};
+```
+### 动态链表malloc或new为链表节点分配内存空间
+* C语言malloc与free
+1. malloc函数  
+C语言中用于动态申请空间
+    ```C
+    #include<stdlib.h>  // 用于申请动态内存的函数
+    // 用法
+    typename* p = (typename*)malloc(sizeof(typename));
+    int* p = (int*)malloc(sizeof(int));
+    node* p = (node*)malloc(sizeof(node));  // 申请内存空间大小为node类型，若申请失败则返回NULL空指针给指针p
+    ```
+2. free函数  
+    ```C++
+    free(p);
+    ```
+* C++中new与delete
+1. new运算符  
+new是C++中用来申请动态空间的运算符，其返回类型同样是申请的同变量类型的指针。
+    ```C++
+    typename* p = new typename;
+    int* p = new int;
+    node* p = new node;
+    ```
+2. delete运算符  
+对应new运算符
+    ```C++  
+    delete(p);
+    ```
+### 静态链表
+对节点的地址是比较小的整数，静态
+```C++
+// 不需要动态建立节点时，使用静态链表
+struct Node{
+    typename data; //数据域
+    int next;  //指针域
+}node[size];
+// 建立连接
+node[11111] = 22222;
+node[22222] = 33333;
+node[33333] = -1; // -1对应动态链表中的NULL
+```
+* 常用静态链表方法：
+    1. 定义静态链表
+    ```C++
+    struct Node{
+        int address; //节点地址
+        typename data; //数据域
+        int next; //指针域
+        XXX; //节点某种性质
+    }node[100010];
+    ```
+    2. 静态链表初始化
+    ```C++
+    for(int i = 0; i<maxn; i++){
+        node[i].XXX = 0;
+    }
+    ```
+    3. 遍历链表
+    ```C++
+    while(p != -1){
+        XXX = 1;
+        count++;
+        p = node[p].next;
+    }
+    ```
+    4. 数组排序   [ [示例-A1052.cpp] ](PAT-LevelA/A1052.cpp)
+    ```C++
+    bool cmp(Node a, Node b){
+        if(a.XXX == -1 || b.XXX == -1){
+            //至少一个节点是无效的，就把它放到数组后面
+            return a.XXX > v.XXX
+        }else{
+            //二级排序
+        }
+    }
+    // 注：sort函数对链表排序，只针对node[i].address排序，对next不作处理
+    ```
 ---
 
 ## 4. 搜索篇
 
 ---
 
-### [1] 深度优先搜索DFS
+### [1] 深度优先搜索 DFS
+> 深度优先搜索是枚举所有完整路径以遍历所有情况的搜索方式。  
+> 使用**递归**能够很好实现深度优先搜索。
 
+* 【例1】n个物品，每个物品重量w[i]，价值c[i]，需要选出若干放入容量为V的背包，使得价值量最大。(1<=n<=20)  
+解答如下：[ [例1.质量最大问题] ](practiseBox/test1.cpp)
 ---
 
-### [2] 广度优先搜索BFS
+### [2] 广度优先搜索 BFS
 
 ---
 
