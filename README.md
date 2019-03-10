@@ -29,12 +29,20 @@
 * 组合数
 
 [施工中] [7-数据结构——2019.03.04](#jump-studyup)(内容极其庞大)
+* [->](#node)链表处理
+* [->](#search)搜索篇
+    * DFS
+    * BFS
+* [->](#tree)二叉树篇   
+...
 
 [施工中] [8-动态规划]()
 
 [施工中] [9-字符串进阶]()
 
 [习题集](PAT-Book.md)
+
+[代码技巧注](#coding)
 
 [备注](#beizhu)
 
@@ -676,7 +684,7 @@ stack
 queue
 ---
 
-## 3. 链表处理
+## 3. 链表处理<span id = "node">-[☝](#top) </span>
 ```C++
 struct node{
     typename data;
@@ -762,7 +770,7 @@ node[33333] = -1; // -1对应动态链表中的NULL
     ```
 ---
 
-## 4. 搜索篇
+## 4. 搜索篇<span id = "search">-[☝](#top) </span>
 
 ---
 
@@ -775,16 +783,169 @@ node[33333] = -1; // -1对应动态链表中的NULL
 ---
 
 ### [2] 广度优先搜索 BFS
-
+> 借用队列完成BFS
+```C++
+void BFS(int s){
+    queue<int> q;
+    q.push(s);
+    while(!q.empty()){
+        取出队首元素top;
+        访问队首元素top;
+        将队首元素出队;
+        将top下一层结点中未曾入队的结点全部入队，并设置为已入队;
+    }
+}
+```
 ---
 
-## 5. 二叉树篇
-
+## 5. 二叉树篇<span id = "tree">-[☝](#top) </span>
+> 二叉树的递归定义：  
+    1. 二叉树没有根节点，是一颗空树。  
+    2. 二叉树由根节点、左子树、右子树组成，且左子树和右子树都是二叉树。  
+[ [示例-二叉树的储存] ]()
+> 二叉树的存储
+```C++
+// 二叉树定义
+struct node{
+    typename data; // 数据域
+    node* lchild;
+    node* rchild;
+};
+```
 ---
 
 ### [1] 二叉树的遍历
+1. 先序遍历 preorder
+    ```C++
+    void preorder(node* root){
+        if(root == NULL){
+            return; //到达空树，递归边界
+        }
+        //访问根节点，即相关操作
+        printf("%d\n", root->data);
+        //访问左子树
+        preorder(root->lchild);
+        //访问右子树
+        preorder(root->rchild);
+    }
+    ```
+2. 中序遍历 inorder
+    ```C++
+    void inorder(node* root){
+        if(root == NULL){
+            return; //到达空树，递归边界
+        }
+        //访问左子树
+        preorder(root->lchild);
+        //访问根节点，即相关操作
+        printf("%d\n", root->data);
+        //访问右子树
+        preorder(root->rchild);       
+    }
+    ```
+3. 后序遍历 postorder
+    ```C++
+    void postorder(node* root){
+        if(root == NULL){
+            return; //到达空树，递归边界
+        }
+        //访问左子树
+        preorder(root->lchild);
+        //访问右子树
+        preorder(root->rchild); 
+        //访问根节点，即相关操作
+        printf("%d\n", root->data);
+    }
+    ```
+4. 层次遍历 layerorder
+    ```C++
+    void layerorder(node* root){
+        queue<node*> q;
+        q.push(root);
+        while(!q.empty()){
+            node* now = q.front();
+            q.pop();
+            printf("根节点相关操作");
+            if(now->lchild != NULL) q.push(now->lchild);
+            if(now->rchild != NULL) q.push(now->rchild);
+        }
+    }
+    //记录层次layer的变量的层次遍历
+    struct node{
+        int data;
+        int layer;
+        node* lchild;
+        node* rchild;
+    };
+    void layerorder(node* root){
+        queue<node*> q;
+        root->layer = 1;
+        q.push(root);
+        while(!q.empty()){
+            node* now = q.front();
+            q.pop();
+            printf("根节点相关操作");
+            if(now->lchild != NULL) {
+                now->lchild->layer = now->layer + 1;
+                q.push(now->lchild);
+            }
+            if(now->rchild != NULL) {
+                now->rchild->layer = now->layer + 1;
+                q.push(now->rchild);
+            }
+        }
+    }
+    ```
+* **给定一颗二叉树的先序遍历序列和中序遍历序列，重建这颗二叉树**
+[ [示例-create] ](practiseBox/tree.cpp)
+
+例题：PAT A1020 Tree Traversals  
+给出二叉树的后序遍历序列和中序遍历序列，求这颗二叉树的层次遍历序列。  
+[ [解答-A1020] ](PAT-LevelA/A1020.cpp)
+
+---
 
 ### [2] 树的遍历
+> 树：子节点个数不限且子节点没有先后顺序的树  
+无所谓左右。因此定义结点结构体如下：  
+```C++
+struct node {
+
+    int data;
+    int child[maxn]; 
+    //若题目中结点数过多使用vector代替数组
+    vector<int> child;
+}Node[maxn];
+```
+1. 树的先根遍历
+    * 类似二叉树的先序遍历，总是先访问根结点，再访问所有子树。
+    ```C++
+    void PreOrder(int root){
+        printf("%d ", Node[root].data); // 访问当前结点
+        for(int i=0;i<Node[root].child.size(); i++){
+            PreOrder(Node[root].child[i]); // 递归访问结点root的所有子结点
+        }
+    }
+    ```
+2. 树的层序遍历  
+    * 类似二叉树的层次遍历。
+    ```C++
+    void LayerOrder(int root){
+        queue<int> Q;
+        Q.push(root); // 根结点入队
+        while(!Q.empty()){
+            int front = Q.front(); //取出队首元素
+            //对当前结点操作
+            Q.pop();
+            for(int i = 0; i < Node[front].child.size(); i++){
+                Q.push(Node[front].child[i]); //当前结点的所有子结点入队
+            }
+        }
+    }
+    ```
+3. 例题 【PAT A1053】Path of Equal Weight
+    
+---
 
 ### [3] 二叉查找树(BST)
 
@@ -835,6 +996,20 @@ node[33333] = -1; // -1对应动态链表中的NULL
 #### (2) 最长路径
 
 #### (3) 关键路径
+---
+
+<span id = "coding"><h1>[☝](#top) 代码技巧注</h1></span> 
+1. 保留位数和小数点
+```C
+//保留5位数，用空格补齐
+%5d
+//保留5位数,不足用0补齐
+%05d
+//保留2位小数
+%.2d
+```
+
+
 ---
 
 <span id = "beizhu"><h1>[☝](#top) 备注</h1></span>
