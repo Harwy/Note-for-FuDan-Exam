@@ -1,10 +1,12 @@
 #include<stdio.h>
-
+const int maxn = 50;
 struct node{
     int data;
     node* lchild;
     node* rchild;
 };
+
+int pre[maxn], in[maxn], post[maxn];
 
 //当前先序序列区间[preL,preR],中序序列区间为[inL,inR]，返回根节点地址
 node* create(int preL, int preR, int inL, int inR){

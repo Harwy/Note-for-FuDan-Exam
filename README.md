@@ -943,24 +943,71 @@ struct node {
         }
     }
     ```
-3. 例题 【PAT A1053】Path of Equal Weight
-    
+3. 例题 【PAT A1053】Path of Equal Weight  
+    [ [解答-A1053.cpp] ](PAT-LevelA/A1053.cpp)
 ---
 
 ### [3] 二叉查找树(BST)
+[ [示例-BST] ](practiseBox/BST.cpp)
+
+【PAT A1043】Is it a Binary Search Tree 
+> 二叉查找树，判断当前序列是否是前序遍历的二叉查找树或者镜像的二叉查找树。  
+输入：  
+7(包含多少个元素N <= 1000)  
+8 6 5 7 10 8 11  
+输出：  
+YES/NO
+若YES，输出Postorder  
+[ [解答-A1043] ](PAT-LevelA/A1043.cpp)
+
+---
 
 ### [4] 平衡二叉树(AVL树)
-
+> 平衡因子：任意结点，左右子树的高度差  
+在树的结构中加入变量height记录当前结点为根节点的子树的高度。
+```C++
+struct node {
+    int v, height; //v为结点权值，height为当前子树高度
+    node *lchild, *rchild;
+};
+```
+> 难点：插入问题
+---
 ### [5] 哈夫曼树
+通过小顶堆的优先队列获取哈夫曼树 [haffman.cpp](practiseBox/haffman.cpp)  
+
 
 ---
 
 ## 6. 并查集
+> 并查集：维护集合的数据结构。Union（合并）、Find（查找）、Set（集合）  
+支持的操作：  
+1.合并：合并两个集合。  
+2.查找：判断两个元素是否在一个集合中。
+```C++
+int father[N];
+father[2] = 1;//2的父结点是1
+father[4] = 2;//4的父结点是2
+```
+> 并查集操作：  
+1.初始化：另所有father[i]=i;  
+2.查找：findFather(int x) 反复查找直到找到 x = father[x];  
+3.合并：把两个集合合并成一个集合  
+>> (1)  对于给定的两个元素a,b，判断是否属于同一个集合，即  
+faA = findFather(a);  
+faB = findFather(b);  
+faA ? faB  
+>> (2)  合并： faA ！= faB条件下，  father[faA] = faB即可
+
+练习：【好朋友】P332
 
 ---
 
 ## 7. 堆
-
+> 堆是一颗完全二叉树。树中每个结点的值都不小于或者不大于其左右孩子结点的值。    
+父亲结点的值大于或等于孩子结点：**大顶堆**  
+父亲结点的值小于或等于孩子结点：**小顶堆**  
+示例：[堆的建立、删除，堆排序](practiseBox/heap.cpp)
 ---
 
 ## 8. 图算法
@@ -968,12 +1015,44 @@ struct node {
 ---
 
 ### [1] 图的基础
+> 图的存储：  
+> 1.邻接矩阵 G[][]  
+> 2.邻接表：   
+    >> （1）存放每条边的终点编号vector<int> Adj[N];  
+    >> （2）或建立node结构体， vector<Node> Adj[N];  
+
+```C++
+struct Node {
+    int v; //边的终点编号
+    int w; //边的权值
+    Node(int _v, int _w) : v(_v), w(_w) {} //构造函数
+}
+vector<Node> Adj[N];
+
+A[1].push_back(Node(3,4)); //加边
+```
 
 ### [2] 图的遍历
+> 图的遍历就是指对图的所有顶点按一定的顺序进行访问。
+#### (1) DFS 深度优先
+1. **连通分量：**  
+*无向图* 中，两个顶点直接可以互相抵达（通过一定路径间接抵达），则两个顶点连通。  
+若图G(V,E)的任意两个顶点都连通，则成为连通图。  
+否则成为非连通图。且其中的极大连通子图为连通分量。
+2. **强连通分量：**  
+*有向图* 中，两个顶点各自通过一条有向路径到达另一个顶点，则这两个顶点强连通。  
+若G(V,E)的任意两个顶点都强连通，则称图G为强连通图；  
+否则图G为非强连通图，且其中极大连通子图为强连通分量。  
 
-#### (1) DFS
+[ [示例-DFS] ](practiseBox/DFS.cpp)
 
-#### (2) BFS
+【PAT A1034】 Head of a Gang  
+解答： [ [A1034.cpp] ](PAT-LevelA/A1034.cpp)  
+> threthold 阈值  
+cluster 集聚，丛
+
+---
+#### (2) BFS 广度优先
 
 ### [3] 最短路径
 
