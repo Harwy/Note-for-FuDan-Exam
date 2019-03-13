@@ -34,6 +34,15 @@
     * DFS
     * BFS
 * [->](#tree)二叉树篇   
+    * [->](#BST-tree)BST   
+    * [->](#tree-union)并查集 
+* [->](#G)图论篇
+    * [->](#G-DFS)图的DFS
+    * [->](#G-BFS)图的BFS
+    * [->](#G-short)最短路径
+    * [->](#G-tree)最小生成树
+    * [->](#G-G)拓扑排序
+       
 ...
 
 [施工中] [8-动态规划]()
@@ -120,6 +129,7 @@
 > 这人很懒什么也没有留 \
 >![图片-绿谷](绿谷.png)
 
+## 暂留 memset方法
 
 ---
 
@@ -947,7 +957,7 @@ struct node {
     [ [解答-A1053.cpp] ](PAT-LevelA/A1053.cpp)
 ---
 
-### [3] 二叉查找树(BST)
+### [3] 二叉查找树(BST) <span id = "BST-tree">-[☝](#top) </span>
 [ [示例-BST] ](practiseBox/BST.cpp)
 
 【PAT A1043】Is it a Binary Search Tree 
@@ -962,7 +972,7 @@ YES/NO
 
 ---
 
-### [4] 平衡二叉树(AVL树)
+### [4] 平衡二叉树(AVL树) 
 > 平衡因子：任意结点，左右子树的高度差  
 在树的结构中加入变量height记录当前结点为根节点的子树的高度。
 ```C++
@@ -979,7 +989,7 @@ struct node {
 
 ---
 
-## 6. 并查集
+## 6. 并查集 <span id = "tree-union">-[☝](#top) </span>
 > 并查集：维护集合的数据结构。Union（合并）、Find（查找）、Set（集合）  
 支持的操作：  
 1.合并：合并两个集合。  
@@ -1010,7 +1020,7 @@ faA ? faB
 示例：[堆的建立、删除，堆排序](practiseBox/heap.cpp)
 ---
 
-## 8. 图算法
+## 8. 图算法 <span id = "G">-[☝](#top) </span>
 
 ---
 
@@ -1034,7 +1044,7 @@ A[1].push_back(Node(3,4)); //加边
 
 ### [2] 图的遍历
 > 图的遍历就是指对图的所有顶点按一定的顺序进行访问。
-#### (1) DFS 深度优先
+#### (1) DFS 深度优先 <span id = "G-DFS">-[☝](#top) </span>
 1. **连通分量：**  
 *无向图* 中，两个顶点直接可以互相抵达（通过一定路径间接抵达），则两个顶点连通。  
 若图G(V,E)的任意两个顶点都连通，则成为连通图。  
@@ -1053,7 +1063,7 @@ cluster 集聚，丛
 
 
 ---
-#### (2) BFS 广度优先
+#### (2) BFS 广度优先<span id = "G-BFS">-[☝](#top) </span>
 > BFS遍历图需要一个**队列**，反复取出队首顶点，将该顶点可到达的**未曾加入过队列**的顶点全部入队。
 [ [示例-BFS] ](practiseBox/BFS.cpp)  
 
@@ -1061,19 +1071,46 @@ cluster 集聚，丛
 解答： [ [A1076.cpp] ](PAT-LevelA/A1076.cpp)
 
 
-### [3] 最短路径
+### [3] 最短路径 <span id = "G-short">-[☝](#top) </span>
+> 最短路径是图论经典问题：  
+给定图G(V,E)，求从起点到终点的路径， 使得这条路径上经过的所有边的边权之和最小。  
+给出图G(V.E)，和起点S、终点T，求S到T的最短路径。  
+解决最短路径问题的常用算法：  
+（1）Dijkstra算法  
+（2）Bellman-Ford算法  
+（3）SPFA算法  
+（4）Floyd算法  
 
-#### (1) Dijkstra算法
+---
+
+#### (1) Dijkstra算法 （迪杰斯特拉算法）
+> 解决**单源最短路径问题**
+```C++
+//G为图， 一般设成全局变量；数组d为源点到达各点的最短路径长度，s为起点
+Dijkstra(G, d[], s){
+    初始化;
+    for(循环n次){
+        u = 使d[u]最小且还未被访问的顶点的标号;
+        记u已被访问;
+        for(从u出发能到达的所有顶点v){
+            if(v未被访问 && u为中介点使s到顶点v的最短距离d[v]更优){
+                优化d[v];
+            }
+        }
+    }
+}
+```
+[ [示例-Dijkstra.cpp] ](practiseBox/Dijkstra.cpp)
 
 #### (2) Floyd算法
 
-### [4] 最小生成树
+### [4] 最小生成树 <span id = "G-tree">-[☝](#top) </span>
 
 #### (1) prim算法
 
 #### (2) kruskal算法
 
-### [5] 拓扑排序
+### [5] 拓扑排序 <span id = "G-G">-[☝](#top) </span>
 
 ### [6] 关键路径
 
@@ -1094,11 +1131,17 @@ cluster 集聚，丛
 //保留2位小数
 %.2d
 ```
-
+2. C语言与C++语言的文件输入输出
+    * C语言   
+    参考1：[[网页跳转->C]](https://www.cnblogs.com/home123/p/8318903.html)
+    * C++   
+    参考1：[[网页跳转->C++]](https://www.cnblogs.com/hdk1993/p/5853233.html)  
+    参考2：[ [C++对txt操作] ](https://blog.csdn.net/stpeace/article/details/12404925)  
+    示例：[ [file.cpp] ](file.cpp)
 
 ---
 
-<span id = "beizhu"><h1>[☝](#top) 备注</h1></span>
+<span id = "beizhu"><h1>[☝](#top) 关于MD文件的备注</h1></span>
 
 MarkDown跳转锚的使用方法：
 

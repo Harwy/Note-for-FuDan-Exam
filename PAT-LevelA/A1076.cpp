@@ -37,6 +37,7 @@ int BFS(int s, int L){ //start为起始结点， L为层数上限
             }
         }
     }
+    return numForward;
 }
 
 int main(){
