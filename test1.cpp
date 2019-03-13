@@ -1,10 +1,15 @@
 #include<stdio.h>
 #include<iostream>
 #include<algorithm>
+#include<string>
 using namespace std;
+const int maxv = 20;
 
 int main() {
-    double a = (1.00*5*45/10);
-	printf("%.2f", a);
+    bool a[maxv] = {false};
+    for(int i = 0; i<maxv; i++){
+        printf("%d ", a[i]);
+    }
+
 	return 0;
 }

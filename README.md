@@ -1051,8 +1051,15 @@ A[1].push_back(Node(3,4)); //加边
 > threthold 阈值  
 cluster 集聚，丛
 
+
 ---
 #### (2) BFS 广度优先
+> BFS遍历图需要一个**队列**，反复取出队首顶点，将该顶点可到达的**未曾加入过队列**的顶点全部入队。
+[ [示例-BFS] ](practiseBox/BFS.cpp)  
+
+【PAT A1076】 Forwards on Weibo  
+解答： [ [A1076.cpp] ](PAT-LevelA/A1076.cpp)
+
 
 ### [3] 最短路径
 
