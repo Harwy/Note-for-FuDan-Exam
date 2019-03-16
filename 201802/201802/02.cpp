@@ -22,20 +22,23 @@ int main() {
 		}
 		else if (str[i] == 'x') {
 			x[number] = 1; //当前数为x系数
-		}else {
-			math[number++] *= temp;
+		}
+		else {
+			if (temp == 0 && x[number] == 1) { temp = 1; }
+			math[number] *= temp;
 			temp = 0;
-			if (str[i] == '-') {
+		}
+		number++;
+		if (str[i] == '-') {
+			math[number] *= -1;
+		}
+		if (str[i] == '=') {
+			for (int j = 0; j < number; j++) {
 				math[number] *= -1;
-			}
-			if (str[i] == '=') {
-				for (int j = 0; j < number; j++) {
-					math[number] *= -1;
-				}
 			}
 		}
 	}
-	math[number++] = temp;
+	//math[number++] = temp;
 	double a = 0, b = 0;
 	for (int j = 0; j < number; j++) {
 		if (x[j] == 1) {
@@ -46,7 +49,7 @@ int main() {
 		}
 	}
 	a = -1 * a;
-
+	printf("%f %f\n", a, b);
 	if (a != 0) {
 		printf("x=%f\n", b/a);
 	}

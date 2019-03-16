@@ -1,3 +1,12 @@
+/*
+Input:
+10x-2x-8=4x+7+x
+Output:
+x=5
+
+change:
+10-2-8=4+7+
+*/
 #include<stdio.h>
 #include<algorithm>
 #include<string>
@@ -6,56 +15,66 @@
 using namespace std;
 const int maxn = 200;
 
-int x[maxn] = { 0 };
-double math[maxn];
+struct node{
+    double x;
+    double b;
+};
+
+queue<double> q, qx; //常数队列和x队列
+char cal[maxn];
+int x[maxn] = {0};
 int number = 0;
+int d=0;
 
 
 int main() {
-	fill(math, math + maxn, 1);
 	string str;
 	cin >> str;
 	double temp = 0;
+	int flag = 1;
+	int c = 0;
 	for (int i = 0; i < str.size(); i++) {
 		if (str[i] >= '0'&&str[i] <= '9') {
 			temp = 10 * temp + str[i] - '0';
-		}
-		else if (str[i] == 'x') {
-			x[number] = 1; //当前数为x系数
-		}else {
-			math[number++] *= temp;
+		}else if (str[i] == 'x') {
+			if(str[i-1] == '+' || str[i-1] == '=' || str[i-1] == '-'){
+                q.push(1);
+			}else{
+                q.push(temp);
+			}
+			qx.push(1);
 			temp = 0;
-			if (str[i] == '-') {
-				math[number] *= -1;
-			}
-			if (str[i] == '=') {
-				for (int j = number; j < maxn; j++) {
-					math[number] *= -1;
-				}
-			}
-		}
+		}else{
+		    cal[c++] = str[i];
+		    if(str[i-1] >= '0'&&str[i-1] <= '9') {
+                    q.push(temp);
+                    qx.push(0);
+            }
+            temp = 0;
+        }
 	}
-	math[number++] = temp;
-	int a = 0, b = 0;
-	for (int j = 0; j < number; j++) {
-		if (x[j] == 1) {
-			a += math[j];
-		}
-		else {
-			b += math[j];
-		}
-	}
-	b = -1 * b;
+    double x=0, b=0;
+	while(!q.empty()){
+        if(qx.front() == 1){
+            x +=
+        }else{
 
-	if (a != 0) {
-		printf("x=%d\n", b / a);
+        }
+        q.front();
+        q.pop();
 	}
-	else if (b != 0) {
-		printf("no solution\n");
+	for(int i = 0; i < c; i++){
+        printf("%c\n", cal[i]);
 	}
-	else {
-		printf("infinite solutions\n");
-	}
+//	if (a != 0) {
+//		printf("x=%d\n", b / a);
+//	}
+//	else if (b != 0) {
+//		printf("no solution\n");
+//	}
+//	else {
+//		printf("infinite solutions\n");
+//	}
 	system("pause");
 	return 0;
 }
