@@ -12,14 +12,14 @@ int main(){
     int m, L, n;
     int x;
     scanf("%d%d", &n, &m);
-    memset(HashTable, -1, n);
+    memset(HashTable, -1, sizeof(HashTable));
     for(int i = 0; i < m; i++){
         scanf("%d", &x);
         HashTable[x] = i;
     }
     int num = 0;
     scanf("%d", &L);
-    for(int i = 0; i<L;i++){
+    for(int i = 0; i < L;i++){
         scanf("%d", &x);
         if(HashTable[x] >= 0){
             A[num++] = HashTable[x];

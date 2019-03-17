@@ -1345,15 +1345,18 @@ int main(){
 ## codeblocks设置自动补全
 1.打开setting->editor  
 
+* BrowseTracker-Enable BrowseMarks
 
+* FortranProject-keyword & keyword case
+
+* Code completion- 2,3,4,5,6,7
 
 2.在General settings中将Automatically launch when typed # letter中的4改成1，这样打1个字母就会有提示了。  
 3.在左边的选项栏中找到 Code completion  
 4.将Keyword sets to additionally include中1到5都勾上  
 5.将Delay for auto-kick-in when typing [.::->]拉到 200ms，这样瞬间就出来了  
-6.选中Case-sensitive match  
-7.找到Keyboard shortcuts   
-8.将Edit->Code complete的快捷键由Ctrl+Space改为Alt+/，这与eclipse的习惯是相同的，可以在提示不小心消失的情况下再次出现
+  
+
 
 
 ---
