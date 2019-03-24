@@ -1,3 +1,10 @@
+/**
+priority_queue<int> q; //默认数字大的优先级高
+priority_queue<int, vector<int>, less<int> > q;
+vector<int> :这是一个堆栈
+less<int> :大顶堆（越来越小）
+greater<int> :小顶堆（越来越大）
+*/
 #include<cstdio>
 #include<queue>
 using namespace std;
@@ -22,5 +29,5 @@ int main(){
     }
     printf("%lld\n", ans);
     return 0;
-    
+
 }

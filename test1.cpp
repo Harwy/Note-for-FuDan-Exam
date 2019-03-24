@@ -1,15 +1,18 @@
 #include<stdio.h>
-#include<iostream>
-#include<algorithm>
 #include<string>
+#include<algorithm>
 using namespace std;
-const int maxv = 20;
-
-int main() {
-    bool a[maxv] = {false};
-    for(int i = 0; i<maxv; i++){
-        printf("%d ", a[i]);
-    }
-
-	return 0;
+int main(){
+//  double A,Ai,B,Bi;
+//  scanf("%lf%lf%lf%lf", &A,&Ai,&B,&Bi );
+//  double an = A*B-Ai*Bi;
+//  double ai = A*Bi+B*Ai;
+//  printf("%.2f%c%.2fi", an,(ai>0?'+':'-') ,abs(ai));
+//    printf("%.2f", (2.3*5.2-3.5*0.4));
+    string str;
+    scanf("%s", str);
+    printf("%s", str);
+    scanf("%s", str);
+    printf("%s", str);
+    return 0;
 }
